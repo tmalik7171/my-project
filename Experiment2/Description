@@ -1,0 +1,7 @@
+This code creates a clean and simple banking interface using just HTML and CSS. 
+It shows your balance starting at "$0" and has two buttons—Deposit and Withdraw—to simulate basic banking actions. 
+The layout is designed to be user-friendly and responsive, meaning it looks good on both desktop and mobile. 
+Everything sits neatly in the center of the screen using the Flexbox. 
+The white card in the middle has soft rounded corners and a light shadow to give it a modern touch. 
+The Deposit button is green, and the Withdraw button is red, making their purpose easy to understand at a glance. 
+

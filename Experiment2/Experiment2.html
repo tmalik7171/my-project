@@ -1,19 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
   <title>Responsive Banking UI</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="banking_ui.css">
+  
   <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
   <div class="outer">
     <div class="inner">
-      <h1 class="balance">$0</h1>
-      <button class="deposit">Deposit</button>
-      <button class="withdraw">Withdraw</button>
+      <h1 class="balance" id="balanceDisplay">$0</h1>
+      <input type="number" id="amountInput" placeholder="Enter amount" min="1" />
+      <button class="deposit" id="depositBtn">Deposit</button>
+      <button class="withdraw" id="withdrawBtn">Withdraw</button>
+      <p id="message" class="message"></p>
     </div>
   </div>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let balance = 0;
+
+    const balanceDisplay = document.getElementById("balanceDisplay");
+    const amountInput = document.getElementById("amountInput");
+    const message = document.getElementById("message");
+
+    document.getElementById("depositBtn").addEventListener("click", function () {
+      const amount = parseFloat(amountInput.value);
+      message.textContent = "";
+
+      if (isNaN(amount) || amount <= 0) {
+        message.textContent = "Please enter a valid amount.";
+        return;
+      }
+
+      balance += amount;
+      balanceDisplay.textContent = `$${balance.toFixed(2)}`;
+      amountInput.value = "";
+    });
+
+    document.getElementById("withdrawBtn").addEventListener("click", function () {
+      const amount = parseFloat(amountInput.value);
+      message.textContent = "";
+
+      if (isNaN(amount) || amount <= 0) {
+        message.textContent = "Please enter a valid amount.";
+        return;
+      }
+
+      if (amount > balance) {
+        message.textContent = "Insufficient balance.";
+        return;
+      }
+
+      balance -= amount;
+      balanceDisplay.textContent = `$${balance.toFixed(2)}`;
+      amountInput.value = "";
+    });
+  });
+</script>
+
 </body>
 </html>
