@@ -4,4 +4,8 @@ The layout is designed to be user-friendly and responsive, meaning it looks good
 Everything sits neatly in the center of the screen using the Flexbox. 
 The white card in the middle has soft rounded corners and a light shadow to give it a modern touch. 
 The Deposit button is green, and the Withdraw button is red, making their purpose easy to understand at a glance. 
+The interface allows you to update the total balance by entering an amount and clicking either Deposit or Withdraw.
+If you try to enter an invalid amount like a negative number, zero, or blank input, the system will display an error message
+and prompt you to enter a valid number.
+
 
