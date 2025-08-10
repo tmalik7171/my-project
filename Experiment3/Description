@@ -1,0 +1,84 @@
+ADMIN DASHBOARD – TEST CASES & VALIDATIONS
+
+1. COMPONENT: Theme Toggle Switch (Dark Mode)
+Requirement: Must be present in the header next to the title.
+Switches between Light Mode and Dark Mode by changing CSS variables via :has(#darktheme:checked).
+Accepts only boolean checked states.
+No .dark-mode class is used — instead, theme colors update through CSS custom properties.
+
+VALID INPUTS: Checkbox checked → Applies Dark Mode colors (--bg-color, --text-color, etc.) from dark theme variables.
+              Checkbox unchecked → Restores Light Mode colors from default variables.
+
+INVALID INPUTS: Checkbox not present in DOM → UI will not allow theme switching.
+                Incorrect CSS selector for dark theme state → Theme won’t update when toggled.
+
+2. COMPONENT: Sidebar Navigation Links (Home, Users, Settings)
+Requirement: Required in the .sidebar section.
+             Must be underlined and evenly aligned vertically.
+             Must be purple (--link-color: #4b0082) in Light Mode and change to lavender (#9f7aea) in Dark Mode.
+
+VALID INPUTS: <a href="#">Home</a> → Visible, underlined, clickable.
+              <a href="#">Users</a> → Visible, underlined, clickable.
+              <a href="#">Settings</a> → Visible, underlined, clickable.
+              Link color changes appropriately in Dark Mode.
+
+INVALID INPUTS: Links missing → Breaks navigation usability.
+                Wrong variable usage → Colors remain same across both themes.
+
+3. COMPONENT: Layout Structure (Grid Areas)
+Requirement:Must use CSS Grid with grid-template-areas for layout.
+
+Expected Alignment:
+Header: Top row, full width.
+Sidebar: Left column, fixed width (200px).
+Main: Right column, takes remaining space.
+Footer: Bottom row, full width.
+Must remain responsive on resize.
+
+VALID INPUTS: All sections (header, .sidebar, main, footer) in correct grid areas.
+              Sidebar width fixed at 200px.
+              Layout adapts without breaking on window resize.
+
+INVALID INPUTS:Missing or incorrect grid-area names.
+Removing display: grid; from .theme-wrapper → Layout stacks vertically.
+
+CSS STYLING BREAKDOWN – STRUCTURED OVERVIEW
+1. ELEMENT: body
+            Controls global background and text color via CSS variables.
+            Light Mode → White background, black text.
+            Dark Mode → Dark background, white text.
+
+2. ELEMENT: .theme-wrapper
+            CSS Grid container for layout.
+            grid-template-columns: 200px 1fr → Sidebar fixed, main flexible.
+            Defines header, sidebar, main, and footer placement.
+
+3. ELEMENT: header
+            Green background (--header-bg).
+            Flex layout → Title left, toggle switch right.
+            Text always white for contrast.
+
+4. ELEMENT: .sidebar
+            Light gray background in Light Mode, dark gray in Dark Mode.
+            Navigation links underlined, purple in Light Mode, lavender in Dark Mode.
+            Extra width for better spacing.
+
+5. ELEMENT: main
+            White background in Light Mode, dark in Dark Mode.
+            Padding for content spacing.
+            Inherits text color from theme.
+
+6. ELEMENT: footer
+            Green background, white centered text.
+
+7. ELEMENT: #darktheme (Checkbox)
+            Scaled for better visibility.
+            Accent color matches link color.
+
+LEARNING OUTCOMES:
+1. Built a responsive admin dashboard layout using semantic HTML + CSS Grid.
+2. Implemented Light/Dark theme toggle using CSS variables & :has() selector.
+3. Practiced theme-based dynamic styling without adding extra classes.
+4. Structured navigation for both usability and accessibility.
+5. Understood how fixed & flexible columns work in CSS Grid layouts.
+
