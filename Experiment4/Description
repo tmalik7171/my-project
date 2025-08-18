@@ -1,0 +1,55 @@
+LIVE CHARACTER COUNTER
+
+COMPONENT: Textarea Input
+Requirement: Must be present in the DOM with id text.
+Captures user input in real-time and triggers the character counting function countChars().
+Resizable disabled to maintain consistent layout.
+
+VALID INPUTS: User types letters, numbers, symbols -> Updates character count dynamically.
+INVALID INPUTS: Textarea missing from DOM -> No input possible, counter will remain at 0.
+
+COMPONENT: Character Counter Display
+Requirement: Must use span with id count.
+Displays the number of characters typed inside the textarea. Updates in real-time as input changes.
+
+VALID INPUTS: Correct innerText update -> Shows accurate number of characters typed.
+INVALID INPUTS: Missing span or incorrect id -> Count will not display.
+
+COMPONENT: Styling/Layout
+Requirement: Page must be centered vertically and horizontally.
+Textarea should have padding, border-radius, fixed width/height, and prevent resizing.
+Background color: light gray (#f5f5f5). Font: Arial, sans-serif.
+
+VALID INPUTS: CSS applied correctly : Elements centered, textarea styled, responsive vertical alignment.
+INVALID INPUTS: Missing or wrong CSS selectors : Elements misaligned, textarea may be resizable or incorrect size.
+
+CSS STYLING BREAKDOWN - STRUCTURED OVERVIEW
+
+ELEMENT: body
+Controls global layout using Flexbox -> vertically & horizontally centers content.
+Background color: #f5f5f5.
+Font: Arial, sans-serif.
+
+ELEMENT: h3
+Margin-bottom for spacing from textarea.
+
+ELEMENT: textarea
+Width: 400px, height: 150px → fixed size for consistent input area.
+Padding: 10px. Font size: 16px. Border-radius: 5px for rounded corners.
+Border: 1px solid #ccc. Resize disabled.
+
+ELEMENT: p / #count
+Displays character count below textarea.
+Margin-top: 10px. Font-size: 16px.
+
+ELEMENT: script / countChars() function
+Reads value of textarea -> updates innerText of #count dynamically.
+Handles all types of input characters, including spaces and special characters.
+
+LEARNING OUTCOMES:
+
+1. Implemented real-time character counting using JavaScript DOM manipulation.
+2. Practiced connecting HTML input events (oninput) to dynamic functions.
+3. Learned basic Flexbox for vertical and horizontal centering.
+4. Applied CSS styling for form elements for usability and aesthetics.
+5. Developed understanding of separating CSS, HTML, and JavaScript for maintainable code.
