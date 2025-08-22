@@ -1,0 +1,92 @@
+Dynamic Product Filter with Dropdown using JavaScript DOM Manipulation
+
+COMPONENT: Product List Container
+Requirement: Must be present in the DOM with id product-list.
+Acts as a placeholder where JavaScript dynamically injects all product items (<li>).
+
+VALID INPUTS: JavaScript successfully writes <li> -> Products appear in the list.
+INVALID INPUTS: Missing element with id product-list -> No products are displayed.
+
+COMPONENT: Category Filter Dropdown
+Requirement: Must be present in the DOM with id category-filter.
+Provides category options (All, Clothing, Electronics, Books) for filtering products.
+
+VALID INPUTS: User changes dropdown value -> List updates with only matching products.
+INVALID INPUTS: Wrong or missing id -> Filtering will not work, list stays unchanged.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+COMPONENT: HTML Structure
+
+Requirement: Page must contain .container wrapping the product list and filter.
+Includes heading <h2>Product List>, filter controls (<label> + <select>), and product list <ul id="product-list">.
+
+VALID INPUTS: Correct structure -> All parts visible and functional.
+INVALID INPUTS: Missing structure -> Layout breaks, JS has no targets to update.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+COMPONENT: JavaScript Logic
+
+Array of Products
+Requirement: Products stored as objects with name and category.
+Example: { name: "T-Shirt", category: "clothing" }.
+
+VALID INPUTS: Array contains valid objects -> Render function works.
+INVALID INPUTS: Array missing keys -> Products cannot render correctly.
+
+Function: renderProducts(items)
+Requirement: Converts product array into <li> elements and injects them into #product-list.
+Uses .map() to build list items and .join('') to insert them in one step.
+
+VALID INPUTS: Called with valid array -> List updates correctly.
+INVALID INPUTS: Called with empty array -> List shows nothing.
+
+Event Listener: Dropdown Change
+Requirement: Watches for changes in #category-filter.
+Logic:
+
+If value = "all" -> render all products.
+Else -> filter products with .filter() and render only matches.
+
+VALID INPUTS: User selects "books" -> Only Novel and Cookbook display.
+INVALID INPUTS: Dropdown missing -> No filtering occurs.
+
+Event Listener: DOMContentLoaded
+Requirement: Ensures initial product list renders when page first loads.
+
+VALID INPUTS: renderProducts(products) runs -> Full list visible.
+INVALID INPUTS: Missing event listener -> List stays empty on load.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+COMPONENT: Styling/Layout
+
+ELEMENT: body
+Centers .container horizontally and vertically using Flexbox.
+Background color: #f0f4f8.
+Font: Arial, sans-serif.
+
+ELEMENT: .container
+White box, width 700px, black border, padding for spacing.
+
+ELEMENT: h2
+Heading styled with spacing below for clarity.
+
+ELEMENT: .filter-controls
+Adds margin below filter section to separate from list.
+
+ELEMENT: #product-list
+Removes default bullet points.
+Applies border around the list.
+
+ELEMENT: .product-item
+Each product has padding.
+Bottom border separates products visually.
+Last product has no bottom border for a clean look.
+
+VALID INPUTS: CSS selectors applied correctly → Centered layout, neat product separation.
+INVALID INPUTS: Wrong selectors → Products appear unstyled or cluttered.
+
+LEARNING OUTCOMES
+1.Implemented a dynamic filtering system using JavaScript arrays and .filter().
+2.Practiced DOM manipulation with innerHTML, .map(), and event listeners.
+3.Ensured initial rendering with DOMContentLoaded.
+4.Applied basic flexbox CSS to center content on screen.
+5.Learned separation of concerns; HTML for structure, CSS for presentation, JS for logic.
