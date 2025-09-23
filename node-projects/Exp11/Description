@@ -1,0 +1,82 @@
+Card Management API with Express
+
+COMPONENT: Express Server
+
+Requirement: Sets up a Node.js server using Express on port 3000 to handle HTTP requests. Supports JSON parsing via express.json().
+
+VALID INPUTS: Requests sent with correct routes and JSON bodies → Server responds with appropriate data or confirmation.
+INVALID INPUTS: Requests to undefined routes or missing JSON body for POST → Returns 404 or 400/415 errors.
+
+COMPONENT: Routes
+
+Route: GET /
+Requirement: Returns a JSON object with request URL and method.
+VALID INPUTS: Any GET request to / → JSON response with url and method.
+INVALID INPUTS: Wrong HTTP method → No response (405 not handled explicitly).
+
+Route: POST /submit
+Requirement: Responds with a success message for data submission.
+VALID INPUTS: POST request → Returns "Data submitted!".
+INVALID INPUTS: GET or other methods → No effect.
+
+Route: PATCH /update
+Requirement: Responds with "Data updated" to simulate updating.
+VALID INPUTS: PATCH request → Success message returned.
+INVALID INPUTS: Other methods → No effect.
+
+Route: DELETE /delete
+Requirement: Responds with "Data Deleted" to simulate deletion.
+VALID INPUTS: DELETE request → Success message returned.
+INVALID INPUTS: Other methods → No effect.
+
+COMPONENT: Cards Array
+
+Requirement: Holds card objects in memory with id, suit, and value. Used as a pseudo-database for CRUD operations.
+
+VALID INPUTS: Objects like { id: 1, suit: 'Hearts', value: 'Ace' } → Accessible through API endpoints.
+INVALID INPUTS: Missing keys → Operations fail, error responses returned.
+
+COMPONENT: Card Routes
+
+Route: GET /cards
+Requirement: Returns full list of cards as JSON.
+VALID INPUTS: GET request → All card objects returned.
+INVALID INPUTS: N/A
+
+Route: GET /cards/:id
+Requirement: Returns a single card matching the ID.
+VALID INPUTS: Existing ID → Card object returned.
+INVALID INPUTS: Non-existent ID → 404 with { error: 'Card not found' }.
+
+Route: POST /cards
+Requirement: Creates a new card with suit and value, assigns unique ID, and adds to array.
+VALID INPUTS: JSON body contains suit and value → Card added, 201 status returned.
+INVALID INPUTS: Missing suit or value → 400 error returned.
+
+Route: DELETE /cards/:id
+Requirement: Removes a card by ID from the array.
+VALID INPUTS: Existing ID → Card removed, confirmation returned.
+INVALID INPUTS: Non-existent ID → 404 error returned.
+
+COMPONENT: JSON Middleware
+
+Requirement: Ensures that incoming request bodies are parsed as JSON via express.json().
+
+VALID INPUTS: JSON request body → Parsed correctly into req.body.
+INVALID INPUTS: Non-JSON body for POST → If uncommented, returns 415 error (currently commented out).
+
+COMPONENT: Server Start
+
+Requirement: Starts the server on the specified port and logs the URL.
+
+VALID INPUTS: Port available → Server runs, endpoints accessible at http://localhost:3000.
+INVALID INPUTS: Port in use → Server fails to start.
+--------------------------------------------------------------------------------------------------------------------------
+LEARNING OUTCOMES:
+
+1.Built a RESTful API with Express supporting CRUD operations.
+2.Learned handling route parameters (:id) and JSON request bodies.
+3.Practiced basic input validation and error handling (400, 404).
+4.Managed in-memory data structures to simulate a database.
+5.Applied Express middleware (express.json()) for request parsing.
+6.Understood separation of routes, logic, and data storage in server-side apps.
