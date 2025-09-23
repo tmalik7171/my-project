@@ -1,0 +1,76 @@
+Seat Booking System with Lock and Confirm API using Express
+
+COMPONENT: Express Server
+
+Requirement: Sets up a Node.js server using Express on port 3000 to handle HTTP requests. Parses JSON bodies using express.json().
+
+VALID INPUTS: Requests sent with JSON body → Server processes seat locking and booking.
+INVALID INPUTS: Non-JSON request body → Request fails or ignored.
+
+COMPONENT: Seats Data Structure
+
+Requirement: Stores seat information as an object where each seat has:
+
+status → "available", "locked", or "booked"
+lockedBy → user ID currently holding the lock (if any)
+lockTimer → timer to automatically release lock after 60 seconds
+
+VALID INPUTS: Seats 1–5 exist → Can be locked or booked correctly.
+INVALID INPUTS: Invalid seat ID → API returns 400 error.
+
+COMPONENT: Routes
+
+Route: GET /seats
+Requirement: Returns the current status of all seats as JSON.
+VALID INPUTS: Request → JSON object with seat IDs and status.
+INVALID INPUTS: N/A (all seats always exist).
+
+Route: POST /lock
+Requirement: Locks a seat for a specific user for 60 seconds to prevent other users from booking.
+VALID INPUTS: JSON body with seatId and userId, seat is available → Seat locked, lockTimer started.
+INVALID INPUTS:
+
+Invalid seatId → 400 error: "Invalid seat ID"
+Seat already booked → 400 error: "Seat already booked"
+Seat locked by another user → 400 error: "Seat is currently locked by another user"
+
+Route: POST /confirm
+Requirement: Confirms the booking of a seat locked by the requesting user. Clears the lock timer.
+VALID INPUTS: JSON body with seatId and userId, seat locked by same user → Seat status updated to "booked" and lock cleared.
+INVALID INPUTS:
+
+Invalid seatId → 400 error: "Invalid seat ID"
+
+Seat not locked by the user or already booked → 400 error: "Seat is not locked by you or already booked"
+
+COMPONENT: Lock Timer Mechanism
+
+Requirement: Automatically releases a lock after 60 seconds if the seat is not confirmed.
+
+Uses setTimeout to reset status to "available" and clear lockedBy and lockTimer.
+
+VALID INPUTS: Seat locked and not confirmed within 60 seconds → Seat becomes available automatically.
+INVALID INPUTS: No timer or timer cleared after confirmation → Lock remains correctly managed.
+
+COMPONENT: JSON Middleware
+
+Requirement: Parses JSON request bodies for POST /lock and POST /confirm.
+
+VALID INPUTS: JSON object received → req.body correctly populated.
+INVALID INPUTS: Missing or invalid JSON → 400 error or request fails.
+
+COMPONENT: Server Start
+
+Requirement: Starts Express server on the specified port and logs the running URL.
+
+VALID INPUTS: Port available → API accessible at http://localhost:3000.
+INVALID INPUTS: Port in use → Server fails to start.
+---------------------------------------------------------------------------------------------------------------------------
+LEARNING OUTCOMES:
+
+1.Implemented a seat booking API with locking mechanism to prevent race conditions.
+2.Learned handling concurrent access using in-memory locks and timers.
+3.Practiced input validation and proper error handling for multiple scenarios.
+4.Applied Express JSON middleware for parsing request bodies.
+5.Understood lifecycle of seat status: available → locked → booked → released.
+6.Learned integrating asynchronous timers (setTimeout) in server-side logic for auto-release.
