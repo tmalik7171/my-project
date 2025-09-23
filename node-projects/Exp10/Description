@@ -1,0 +1,92 @@
+Employee Management System with Express and CLI Interface
+
+COMPONENT: Express Server
+
+Requirement: Sets up a Node.js server using Express on port 3000 to handle HTTP requests. Provides endpoints for basic CRUD operations:
+
+GET / → Returns the request URL and method.
+POST /submit → Simulates submitting data.
+PATCH /update → Simulates updating data.
+DELETE /delete → Simulates deleting data.
+
+VALID INPUTS: Requests sent to defined routes → Correct responses returned.
+INVALID INPUTS: Requests to undefined routes → Returns 404 Not Found.
+
+COMPONENT: Employees Array
+
+Requirement: Stores employee objects with name and id. Acts as the in-memory database for CLI operations.
+
+VALID INPUTS: Each object contains name and id → CLI can list, add, or remove employees.
+INVALID INPUTS: Missing keys or duplicate IDs → Operations may fail or warn the user.
+
+COMPONENT: CLI Menu System
+
+Requirement: Uses Node.js readline to create an interactive command-line interface with these options:
+Add Employee
+List Employees
+Remove Employee
+Exit
+
+VALID INPUTS: Numbers 1–4 → Executes corresponding function.
+INVALID INPUTS: Any other input → Prompts user with “Invalid choice” and re-asks.
+
+COMPONENT: Functions for CLI Operations
+
+Function: showMenu()
+Requirement: Displays available options to the user.
+VALID INPUTS: Menu prints successfully.
+INVALID INPUTS: N/A (simple console log).
+
+Function: listEmployees()
+Requirement: Prints all employees from the employees array.
+VALID INPUTS: Non-empty array → Shows employee list.
+INVALID INPUTS: Empty array → Prints “No employees found.”
+
+Function: addEmployee(name, id)
+Requirement: Adds a new employee to the array.
+VALID INPUTS: Unique id and non-empty name → Employee added.
+INVALID INPUTS: Duplicate id → Prints warning, employee not added.
+
+Function: removeEmployeeById(id)
+Requirement: Removes an employee based on id.
+VALID INPUTS: Existing id → Employee removed.
+INVALID INPUTS: Non-existent id → Prints “No employee found with ID.”
+
+COMPONENT: Prompt Functions
+
+Function: promptChoice()
+Requirement: Continuously asks user for CLI choice and calls appropriate function.
+VALID INPUTS: Choices 1–4 → Executes correct action and loops.
+INVALID INPUTS: Invalid numbers/characters → Re-prompts user.
+
+Function: promptAdd(done)
+Requirement: Prompts for employee name and id, validates input, adds employee, and calls done callback.
+VALID INPUTS: Non-empty name and unique ID → Employee added successfully.
+INVALID INPUTS: Empty name/ID or duplicate ID → Warns user and repeats prompt.
+
+Function: promptRemove(done)
+Requirement: Prompts for employee id and removes employee if found.
+VALID INPUTS: Existing ID → Employee removed.
+INVALID INPUTS: Empty or invalid ID → Warns user and calls done.
+
+COMPONENT: Event Listeners & Exit Handling
+
+Event: rl.on('close') → Displays “Exiting Employee CLI” and exits process.
+Event: process.on('SIGINT') → Gracefully closes CLI on Ctrl+C.
+
+VALID INPUTS: Ctrl+C or exit option → CLI exits gracefully.
+INVALID INPUTS: N/A (handled).
+
+COMPONENT: Server Start
+
+Requirement: Starts Express server and initializes CLI menu.
+VALID INPUTS: Server starts successfully → Accessible at http://localhost:3000 and CLI menu visible.
+INVALID INPUTS: Port already in use → Server fails to start.
+------------------------------------------------------------------------------------------------------------------
+LEARNING OUTCOMES:
+
+1.Implemented a Node.js Express server with basic CRUD routes.
+2.Learned CLI interaction using Node.js readline module.
+3.Practiced in-memory data management with arrays.
+4.Combined server-side and command-line interfaces in one application.
+5.Handled input validation, duplicate checking, and graceful exits.
