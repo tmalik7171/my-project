@@ -1,0 +1,92 @@
+JWT Authentication for Secure Banking API Endpoints
+
+COMPONENT: Express Server Setup
+Requirement: Initialize Express app and listen on port 3000. Handle JSON request bodies using express.json().
+VALID INPUTS: Server starts successfully → Logs running message.
+INVALID INPUTS: Missing initialization → Server won’t start.
+
+COMPONENT: Logging Middleware
+Requirement: Logs all HTTP requests with timestamp, method, and URL.
+VALID INPUTS: Any request → Logs appear in console.
+INVALID INPUTS: Middleware missing → Requests not logged.
+
+COMPONENT: JWT Secret Key
+Requirement: SECRET_KEY used to sign and verify JWTs for authentication.
+VALID INPUTS: Token signed and verified successfully → Access granted to protected routes.
+INVALID INPUTS: Invalid key or tampered token → Access denied.
+
+COMPONENT: Sample User
+Requirement: Hardcoded user (username: tushar, password: 12345, balance: 1000) for demonstration of authentication and banking operations.
+VALID INPUTS: Correct credentials → JWT issued.
+INVALID INPUTS: Incorrect username/password → 401 Unauthorized.
+
+COMPONENT: Authentication Middleware (authMiddleware)
+Requirement: Verifies Bearer token from Authorization header and attaches decoded user payload to request.
+VALID INPUTS: Valid token → Allows access to protected routes.
+INVALID INPUTS: Missing/invalid token → Returns 401/403 errors.
+
+COMPONENT: Public Routes
+Requirement: /public route accessible without authentication.
+VALID INPUTS: GET request → Returns 200 OK with public message.
+INVALID INPUTS: Route missing → 404 Not Found.
+
+COMPONENT: Login Route
+Requirement: /login accepts username and password; returns signed JWT on successful authentication.
+VALID INPUTS: Correct credentials → Returns JWT.
+INVALID INPUTS: Incorrect credentials → Returns 401 Unauthorized.
+
+COMPONENT: Protected Banking Routes
+
+View Balance (/balance): Returns current balance.
+Deposit (/deposit): Adds amount to balance; validates positive numbers.
+Withdraw (/withdraw): Subtracts amount from balance; validates positive number and sufficient funds.
+
+VALID INPUTS: Correct JWT + valid amounts → Updates balance and returns success.
+INVALID INPUTS: Missing/invalid token, invalid amounts, insufficient balance → Returns appropriate error messages.
+
+COMPONENT: Admin Router (/admin)
+Requirement: Nested router with middleware for logging; route /admin/dashboard protected by JWT authentication.
+VALID INPUTS: Authenticated request → Access dashboard and logs middleware executed.
+INVALID INPUTS: Missing/invalid token → Access denied.
+
+COMPONENT: User CRUD Operations (/users)
+
+Create User: POST /users → Adds user to in-memory array.
+Read Users: GET /users → Lists all users.
+Update User: PUT /users/:id → Updates user by ID.
+Delete User: DELETE /users/:id → Deletes user by ID.
+
+VALID INPUTS: Correct request body → CRUD operations succeed.
+INVALID INPUTS: Missing body or invalid ID → Operations fail or no change occurs.
+
+COMPONENT BREAKDOWN – STRUCTURED OVERVIEW
+
+ELEMENT: express.json()
+Parses incoming JSON for POST/PUT requests.
+
+ELEMENT: Logging Middleware
+Console logs request metadata for monitoring/debugging.
+
+ELEMENT: authMiddleware
+Verifies JWT and attaches decoded payload to request for protected routes.
+
+ELEMENT: Public & Protected Routes
+Illustrates route-level access control: public routes open to all, protected routes require JWT.
+
+ELEMENT: Banking Routes
+Simulates basic account operations: balance check, deposit, withdraw.
+
+ELEMENT: Admin Router
+Nested router structure with route-specific middleware for modularity and logging.
+
+ELEMENT: User CRUD
+Demonstrates RESTful operations using an in-memory array for simplicity.
+
+LEARNING OUTCOMES:
+
+1. Implemented JWT-based authentication for protected routes.
+2. Practiced creating RESTful APIs with Express.js.
+3. Learned middleware usage for logging and authentication.
+4. Developed basic banking operations (view balance, deposit, withdraw) with validation.
+5. Understood nested routers and route organization for scalable APIs.
+6. Gained experience in CRUD operations and error handling in Node.js.

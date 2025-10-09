@@ -1,0 +1,58 @@
+Account Transfer System with Balance Validation in Node.js
+
+COMPONENT: Express Server Setup
+Requirement: Initialize Express application and listen on port 3000. Handle incoming JSON request bodies using express.json().
+VALID INPUTS: Server starts successfully → Logs running message.
+INVALID INPUTS: Missing initialization → Server won’t start.
+
+COMPONENT: MongoDB Connection
+Requirement: Connects to MongoDB at mongodb://127.0.0.1:27017/bank using Mongoose with useNewUrlParser and useUnifiedTopology.
+VALID INPUTS: MongoDB service running → Connection established.
+INVALID INPUTS: MongoDB not running or connection string incorrect → Server logs connection error.
+
+COMPONENT: User Schema & Model
+Requirement: Defines Mongoose schema with fields name (String) and balance (Number). Model User used to interact with MongoDB collection.
+VALID INPUTS: Schema fields correctly mapped → Documents can be created, updated, or retrieved.
+INVALID INPUTS: Schema misconfigured → Mongoose operations may fail.
+
+COMPONENT: Create Sample Users (/create-users)
+Requirement: POST endpoint that inserts predefined users (Alice and Bob) into MongoDB.
+VALID INPUTS: Request sent → Returns 201 Created with user documents.
+INVALID INPUTS: MongoDB unavailable → Returns 500 Internal Server Error.
+
+COMPONENT: Transfer Endpoint (/transfer)
+Requirement: POST endpoint that transfers money from one user to another. Performs validations:
+
+Checks that fromUserId, toUserId, and amount are present and valid.
+Confirms both users exist.
+Ensures sender has sufficient balance.
+Updates balances sequentially.
+
+VALID INPUTS: Valid IDs and sufficient sender balance → Returns 200 OK with updated balances and success message.
+INVALID INPUTS: Missing data, invalid IDs, or insufficient balance → Returns 400 or 404 error with meaningful message.
+
+COMPONENT BREAKDOWN – STRUCTURED OVERVIEW
+
+ELEMENT: express.json()
+Parses incoming JSON request bodies for POST requests.
+
+ELEMENT: MongoDB Connection
+Establishes connection to local MongoDB instance for data persistence.
+
+ELEMENT: User Schema (name, balance)
+Defines structure of user documents for consistent storage and retrieval.
+
+ELEMENT: /create-users Endpoint
+Inserts initial sample users for testing transfer functionality.
+
+ELEMENT: /transfer Endpoint
+Validates request data → checks balances → updates sender and receiver sequentially → returns meaningful success or error response.
+
+LEARNING OUTCOMES:
+
+1. Implemented a Node.js API connected to MongoDB using Mongoose.
+2. Learned to define schemas and models for persistent data storage.
+3. Practiced creating RESTful endpoints with validation and error handling.
+4. Implemented sequential multi-document updates to ensure logical consistency without transactions.
+5. Gained experience handling success and error responses in JSON format for API consumers.
+6. Understood basic banking logic with transfer functionality and balance validation.

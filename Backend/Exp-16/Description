@@ -1,0 +1,70 @@
+Middleware Implementation for Logging and Bearer Token Authentication
+
+COMPONENT: Express Server Setup
+Requirement: Must initialize an Express application and listen on port 3000. Handles incoming JSON requests using express.json().
+VALID INPUTS: Server starts successfully → Logs running message, ready to accept requests.
+INVALID INPUTS: Missing express() initialization or port binding → Server will not start.
+
+COMPONENT: Logging Middleware
+Requirement: Logs all incoming HTTP requests with method, URL, and timestamp.
+VALID INPUTS: Requests sent to any route → Console logs [timestamp] METHOD URL.
+INVALID INPUTS: Middleware not applied → Requests not logged.
+
+COMPONENT: Authentication Middleware (authMiddleware)
+Requirement: Secures protected routes by checking for a Bearer token (mysecrettoken) in the Authorization header.
+VALID INPUTS: Header Authorization: Bearer mysecrettoken → Access granted.
+INVALID INPUTS: Missing or incorrect token → Returns 401 Unauthorized or 403 Forbidden.
+
+COMPONENT: Public Route
+Requirement: Accessible without authentication at /public. Returns simple message.
+VALID INPUTS: GET request → Responds with status 200 and message.
+INVALID INPUTS: Route removed → 404 Not Found.
+
+COMPONENT: Protected Route
+Requirement: Accessible only with valid Bearer token at /protected.
+VALID INPUTS: Correct token → Responds with status 200 and confirmation message.
+INVALID INPUTS: Invalid or missing token → Access denied.
+
+COMPONENT: Admin Router (/admin)
+Requirement: Nested router with middleware to log admin access. Protects /admin/dashboard.
+VALID INPUTS: Authenticated GET request → Logs admin access and returns dashboard message.
+INVALID INPUTS: Missing authentication or router → Admin routes inaccessible.
+
+COMPONENT: User CRUD Operations
+Requirement: In-memory users array supports full CRUD:
+
+POST /users → Add user
+GET /users → List users
+PUT /users/:id → Update user by ID
+DELETE /users/:id → Delete user by ID
+VALID INPUTS: Correct JSON body → Users added, updated, deleted as expected.
+INVALID INPUTS: Missing body, invalid ID → Operations fail or no changes made.
+
+COMPONENT BREAKDOWN - STRUCTURED OVERVIEW
+
+ELEMENT: app.use(express.json())
+Parses incoming JSON requests for all routes. Required for POST and PUT requests.
+
+ELEMENT: Logging Middleware
+Console logs request method, URL, and timestamp for debugging and monitoring.
+
+ELEMENT: authMiddleware function
+Checks Authorization header → grants or denies access to protected routes.
+
+ELEMENT: Public & Protected Routes
+Demonstrates route-level access control, with public route open to all and protected routes requiring valid token.
+
+ELEMENT: Admin Router
+Nested router structure with route-specific middleware for admin routes.
+
+ELEMENT: User CRUD Routes
+Uses in-memory array users → demonstrates basic RESTful operations without a database.
+
+LEARNING OUTCOMES:
+
+1. Implemented middleware in Express.js for logging and authentication.
+2. Secured routes using a Bearer token for protected and admin routes.
+3. Practiced RESTful API design with full CRUD operations.
+4. Learned route organization, including nested routers for modularity.
+5. Gained understanding of request handling, status codes, and JSON responses.
+6. Developed experience in creating scalable and maintainable backend structure.
