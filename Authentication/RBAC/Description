@@ -1,0 +1,65 @@
+Role-Based Access Control (RBAC) with Express.js and JWT
+
+🔹 Overview
+
+Demonstrates how to implement role-based access control (RBAC) in a Node.js backend using Express.js and JSON Web Tokens (JWT).
+Allows different users (Admin, Moderator, and User) to access specific protected routes based on their role.
+Provides a practical understanding of authentication, authorization, token handling, and secure API design.
+
+🔹 Backend (Express.js)
+
+Built using Express.js, a fast and minimal Node.js framework.
+Uses body-parser middleware to parse JSON request bodies.
+Configured to return formatted JSON responses for better readability (app.set('json spaces', 2)).
+JWT (jsonwebtoken) used for secure token creation and verification.
+
+🔹 Authentication Flow
+
+Login Route (/login)
+Users send credentials (username and password) via POST request.
+Backend checks credentials against a hardcoded list of users.
+On success, generates a JWT containing id, username, and role with 1-hour expiration.
+Returns the JWT in the response.
+On failure, returns a 401 Unauthorized response.
+Token Verification Middleware (verifyToken)
+Checks for the Authorization header in the request.
+Extracts the token from the Bearer <token> format.
+Verifies the JWT; attaches the decoded user info (id, username, role) to req.user.
+Returns 401 if missing or 403 if invalid/expired.
+Role-Based Middleware (authorizeRoles)
+Accepts a list of allowed roles for a route.
+Checks if the authenticated user’s role is permitted.
+Returns 403 Forbidden if the role is insufficient.
+
+🔹 Protected Routes
+
+Admin Dashboard (/admin-dashboard)
+Accessible only to Admin users. Returns user info and a welcome message.
+
+Moderator Panel (/moderator-panel)
+Accessible only to Moderator users. Returns user info and a welcome message.
+
+User Profile (/user-profile)
+Accessible to all roles (User, Admin, Moderator). Returns user info and a personalized message.
+
+🔹 Security Considerations
+
+JWT ensures that only authenticated users with valid tokens can access protected routes.
+Role-based middleware prevents users from accessing routes outside their permissions.
+Passwords are hardcoded here for demonstration; in production, passwords must be hashed and stored securely.
+Token expiration (1h) ensures sessions are temporary, reducing security risks.
+
+🔹 Key Concepts Demonstrated
+
+RESTful API development with Express.js
+JWT authentication (jwt.sign, jwt.verify)
+Role-based access control (RBAC)
+Middleware usage for token verification and authorization
+Structured JSON responses with status codes
+Protecting sensitive routes based on user roles
+
+🔹 Conclusion
+
+This project provides a hands-on example of implementing secure authentication and RBAC in a backend API.
+It shows how to generate and validate tokens, restrict access based on user roles, and return meaningful responses to the client.
+Serves as a strong foundation for building secure web applications with multi-level user permissions and protected resources.

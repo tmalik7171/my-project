@@ -1,0 +1,55 @@
+JWT-Based Authentication in Express.js
+
+🔹 Overview
+
+Demonstrates how to implement user authentication and protected routes in a Node.js backend using Express.js and JSON Web Tokens (JWT).
+Provides a practical understanding of how to generate, verify, and use JWTs to secure API endpoints.
+Implements role-independent access control and token-based session management for web applications.
+
+🔹 Backend (Express.js)
+
+Built using Express.js, a minimal and fast Node.js framework.
+Handles HTTP methods like GET and POST for login and protected routes.
+Defines a POST API endpoint (/login) to authenticate users and generate JWT tokens with payload information (id and username).
+Includes a GET API endpoint (/protected) that verifies JWTs and allows access only to authenticated users.
+Uses body-parser middleware to parse JSON request bodies and jsonwebtoken for creating and validating tokens.
+
+🔹 Authentication Flow
+
+User sends login credentials via POST /login.
+Backend verifies credentials against a hardcoded user.
+
+On success:
+
+Generates a JWT containing user id and username.
+Sets expiration to 1 hour.
+Decodes the token to include iat (issued at) and exp (expiration) in the response.
+On failure, returns a 401 Unauthorized response with an error message.
+
+🔹 Protected Routes
+
+The /protected endpoint demonstrates token verification:
+Requires an Authorization header with format Bearer <token>.
+Verifies the JWT using the secret key.
+Returns a success message if the token is valid.
+Returns an error message if the token is missing or invalid.
+
+🔹 Security Considerations
+
+Passwords are hardcoded in this example for simplicity — in real applications, passwords must be hashed and stored securely.
+JWTs are used to prevent unauthorized access to sensitive endpoints.
+Token expiration ensures sessions are valid for a limited time, reducing security risks.
+
+🔹 Key Concepts Demonstrated
+
+RESTful API development using Express.js
+User authentication using JWT
+Token generation (jwt.sign) and verification (jwt.verify)
+Handling protected routes and checking authorization headers
+Sending structured JSON responses with status codes
+
+🔹 Conclusion
+
+This project provides a hands-on understanding of secure authentication in backend applications.
+It shows how to create JWTs, protect API routes, and manage token-based sessions effectively.
+Serves as a foundational example for building secure web applications with login systems and protected resources.
